@@ -120,11 +120,11 @@ exec master.dbo.xp_cmdshell username;--
 ​	比如大小写转换，%0a、+、/**/代替空格； *+ 为什么可以代替空格？*
 
 
-那如果前端做的比较好，不显示报错信息呢？
-syscolumns、sysdatabases 、sysobjects 具体代表了什么？
-- sysdatabases和数据库信息有关，它的name表示所有的数据库，dbid列是他们的顺序，也是标识符
-- sysobjects和数据库中的表的信息有关，name是表名，xtype='u'表示用户表，id是表的标识符
-- syscolumns和表的列属性有关，name是列名，可以通过表的id来选择所属的表。
+> 那如果前端做的比较好，不显示报错信息呢？
+> syscolumns、sysdatabases 、sysobjects 具体代表了什么？
+>  - sysdatabases和数据库信息有关，它的name表示所有的数据库，dbid列是他们的顺序，也是标识符
+>  - sysobjects和数据库中的表的信息有关，name是表名，xtype='u'表示用户表，id是表的标识符
+>  - syscolumns和表的列属性有关，name是列名，可以通过表的id来选择所属的表。
 
 
 #### sqlserver另类玩法
