@@ -119,6 +119,10 @@ exec master.dbo.xp_cmdshell username;--
 
 ​	比如大小写转换，%0a、+、/**/代替空格； *+ 为什么可以代替空格？*
 
+<!--那如果前端做的比较好，不显示报错信息呢？
+     syscolumns、sysdatabases 、sysobjects 具体代表了什么？
+-->
+
 #### sqlserver另类玩法
 
 #### sqlserver差异备份、完全备份、权限入侵
