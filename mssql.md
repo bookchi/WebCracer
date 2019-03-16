@@ -22,7 +22,7 @@
 
 调用数据库的代码，一般写在配置文件里面config, conn；
 
-``` vbscript
+``` vb
 <%
     set conn = server.createobject("adodb.connecton")
     conn.open "provider=sqloledb;source=local;uid=sa;pwd=***;database=database-name"
