@@ -159,9 +159,15 @@ information_schema是一个很重要的库，information_schema.tables
 
 
 
+
+
 > 正则表达式还是需要熟悉，尤其是转义这一块
 >
 > url编码需要了解；
 >
 > 转16进制可以绕过 ' 被过滤的情况
+>
+> mysql显错注入的了解；
+
+
 
